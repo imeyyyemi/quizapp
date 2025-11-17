@@ -24,28 +24,7 @@ public class UserRepository {
     }
 
     public Optional<User> findByEmail(String email) {
-        return users.values().stream()
-                .filter(u -> u.getEmail().equals(email))
-                .findFirst();
-    }
 
-    public List<User> findAll() {
-        return new ArrayList<>(users.values());
-    }
-
-    public List<User> findByRole(User.UserRole role) {
-        return users.values().stream()
-                .filter(u -> u.getRole() == role)
-                .collect(Collectors.toList());
-    }
-
-    public boolean delete(Long id) {
-        return users.remove(id) != null;
-    }
-
-    public boolean existsByEmail(String email) {
-        return users.values().stream()
-                .anyMatch(u -> u.getEmail().equals(email));
     }
 }
 

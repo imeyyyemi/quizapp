@@ -27,17 +27,7 @@ public class QuizRepository {
         return new ArrayList<>(quizzes.values());
     }
 
-    public List<Quiz> findByCreatedBy(Long adminId) {
-        return quizzes.values().stream()
-                .filter(q -> q.getCreatedBy().equals(adminId))
-                .collect(Collectors.toList());
-    }
 
-    public List<Quiz> findAssignedToStudent(Long studentId) {
-        return quizzes.values().stream()
-                .filter(q -> q.getAssignedTo() != null && q.getAssignedTo().contains(studentId))
-                .collect(Collectors.toList());
-    }
 
     public boolean delete(Long id) {
         return quizzes.remove(id) != null;
