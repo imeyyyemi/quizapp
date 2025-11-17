@@ -26,19 +26,7 @@ public class QuizResultService {
     private UserRepository userRepository;
 
     public QuizResult submitQuiz(Long studentId, QuizSubmitRequest request) {
-        Optional<Quiz> quizOptional = quizRepository.findById(request.getQuizId());
-        if (quizOptional.isEmpty()) {
-            return null;
-        }
 
-        Quiz quiz = quizOptional.get();
-        List<Integer> answers = request.getAnswers();
-
-        int score = 0;
-        for (int i = 0; i < quiz.getQuestions().size(); i++) {
-            if (i < answers.size() && answers.get(i) == quiz.getQuestions().get(i).getCorrectAnswer()) {
-                score++;
-            }
         }
 
         QuizResult result = new QuizResult();
