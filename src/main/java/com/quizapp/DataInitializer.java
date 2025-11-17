@@ -17,24 +17,7 @@ public class DataInitializer {
 
     @Bean
     public CommandLineRunner initializeData(UserRepository userRepository, QuizRepository quizRepository) {
-        return args -> {
-            // Create admin user
-            User admin = new User();
-            admin.setName("Admin User");
-            admin.setEmail("admin@example.com");
-            admin.setPassword("admin123");
-            admin.setRole(User.UserRole.ADMIN);
-            admin.setCreatedAt(System.currentTimeMillis());
-            User savedAdmin = userRepository.save(admin);
 
-            // Create test student users
-            User student1 = new User();
-            student1.setName("John Doe");
-            student1.setEmail("john@example.com");
-            student1.setPassword("student123");
-            student1.setRole(User.UserRole.STUDENT);
-            student1.setCreatedAt(System.currentTimeMillis());
-            User savedStudent1 = userRepository.save(student1);
 
             User student2 = new User();
             student2.setName("Jane Smith");
