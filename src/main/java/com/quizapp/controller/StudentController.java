@@ -26,17 +26,11 @@ public class StudentController {
     private TokenUtil tokenUtil;
 
     @GetMapping("/quizzes")
-    public ResponseEntity<List<Quiz>> getAssignedQuizzes(@RequestHeader("Authorization") String token) {
-        Long studentId = tokenUtil.extractUserIdFromToken(token);
-        List<Quiz> quizzes = quizService.getAssignedQuizzesForStudent(studentId);
-        return ResponseEntity.ok(quizzes);
+
     }
 
     @GetMapping("/quizzes/{id}")
-    public ResponseEntity<Quiz> getQuiz(@PathVariable Long id) {
-        return quizService.getQuizById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+
     }
 
     @PostMapping("/quizzes/submit")
