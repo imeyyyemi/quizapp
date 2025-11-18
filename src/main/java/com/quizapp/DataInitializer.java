@@ -17,7 +17,24 @@ public class DataInitializer {
 
     @Bean
     public CommandLineRunner initializeData(UserRepository userRepository, QuizRepository quizRepository) {
+       return args -> {
+           // Create admin user
+           User admin = new User();
+           admin.setName("Admin User");
+           admin.setEmail("admin@example.com");
+           admin.setPassword("admin123");
+           admin.setRole(User.UserRole.ADMIN);
+           admin.setCreatedAt(System.currentTimeMillis());
+           User savedAdmin = userRepository.save(admin);
 
+           // Create test student users
+           User student1 = new User();
+           student1.setName("John Doe");
+           student1.setEmail("john@example.com");
+           student1.setPassword("student123");
+           student1.setRole(User.UserRole.STUDENT);
+           student1.setCreatedAt(System.currentTimeMillis());
+           User savedStudent1 = userRepository.save(student1);
 
             User student2 = new User();
             student2.setName("Jane Smith");
@@ -37,7 +54,7 @@ public class DataInitializer {
             List<Question> questions1 = Arrays.asList(
                 new Question(
                     "What is the main method in Java?",
-                    Arrays.asList("public static void main(String[] args)", "private void main()", "public void main(String args)", "static main()"),
+                        Arrays.asList("public static void main(String[] args)", "private void main()", "public void main(String args)", "static main()"),
                     0
                 ),
                 new Question(
@@ -73,22 +90,23 @@ public class DataInitializer {
             quiz2.setCreatedAt(System.currentTimeMillis());
 
             List<Question> questions2 = Arrays.asList(
-                new Question(
-                    "What is Spring Boot primarily used for?",
-                    Arrays.asList("Frontend development", "Building microservices", "Database management", "Mobile development"),
-                    1
-                ),
-                new Question(
-                    "Which annotation is used to mark a Spring Bean?",
-                    Arrays.asList("@Bean", "@Component", "@Service", "All of the above"),
-                    3
-                ),
-                new Question(
-                    "What does 'IoC' stand for in Spring?",
-                    Arrays.asList("Input/Output Control", "Inversion of Control", "Internal Operation Code", "Information Object Container"),
-                    1
-                )
-            );
+                   new Question(
+                           "What is Spring Boot primarily used for?",
+                           Arrays.asList("Frontend development", "Building microservices", "Database management", "Mobile development"),
+                           1
+                   ),
+                   new Question(
+                           "Which annotation is used to mark a Spring Bean?",
+                           Arrays.asList("@Bean", "@Component", "@Service", "All of the above"),
+                           3
+                   ),
+                   new Question(
+                           "What does 'IoC' stand for in Spring?",
+                           Arrays.asList("Input/Output Control", "Inversion of Control", "Internal Operation Code", "Information Object Container"),
+                           1
+                   )
+           );
+
             quiz2.setQuestions(questions2);
             quiz2.setAssignedTo(new ArrayList<>(Arrays.asList(savedStudent1.getId())));
             quizRepository.save(quiz2);
