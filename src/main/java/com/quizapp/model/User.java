@@ -15,6 +15,7 @@ public class User {
     private UserRole role;
     private Long createdAt;
 
+
     public enum UserRole {
         ADMIN, STUDENT
     }

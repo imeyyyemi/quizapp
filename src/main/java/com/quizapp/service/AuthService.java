@@ -50,7 +50,21 @@ public class AuthService {
     }
 
     public AuthResponse login(LoginRequest request) {
+        Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
 
+        if (userOptional.isEmpty()) {
+            return new AuthResponse (null, "Invalid email or password", null, null, null, null);
+        }
+
+        User user = userOptional.get();
+        if (!user.getPassword().equals(request.getPassword())) {
+            return new AuthResponse(null, "Invalid email or password", null, null, null, null);
+        }
+
+        String token = jwtTokenProvider.generateToken(user.getId(), user.getRole().toString());
+
+        return new AuthResponse(token, "Login successful", user.getId(),
+                user.getRole().toString(), user.getName(), user.getEmail());
     }
 
     public Optional<User> getUserById(Long id) {
